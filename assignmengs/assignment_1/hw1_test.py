@@ -16,18 +16,18 @@ class TestFns(unittest.TestCase):
         self.assertEqual(correct, wl.bills)
         self.assertTrue(wl.is_sorted)
         self.assertTrue(wl.validator.match('CF35365625U'))
-        
+
         wl = WatchList('bill_file_0.txt')
         self.assertEqual(correct, wl.bills)
         self.assertFalse(wl.is_sorted)
         self.assertTrue(wl.validator.match('CF35365625U'))
-        
+
         wl = WatchList('bill_file_1.txt')
         correct = {'5': [], '10': [], '20': [], '50': [], '100': ['CF35365625U']}
         self.assertEqual(correct, wl.bills)
         self.assertFalse(wl.is_sorted)
         self.assertTrue(wl.validator.match('CF35365625U'))
-        
+
         wl = WatchList('bill_file_77.txt')
         sorted_dict = pickle.load(open('bill_file_77_sorted.pkl', 'rb'))
         self.assertNotEqual(sorted_dict, wl.bills)
@@ -80,7 +80,7 @@ class TestFns(unittest.TestCase):
         wl.insert('AE84639149A 100')
         wl.insert('AH84639149A 100')
         wl.insert('AL84639149A 100')
-        self.assertFalse(wl.bills['5'] or wl.bills['10'] or 
+        self.assertFalse(wl.bills['5'] or wl.bills['10'] or
                          wl.bills['20'] or wl.bills['50'])
         correct = ['AE84639149A', 'AH84639149A', 'AI84639149A', 'AL84639149A']
         self.assertEqual(correct, wl.bills['100'])
@@ -88,7 +88,7 @@ class TestFns(unittest.TestCase):
         wl.insert('AE84639149A 10')
         wl.insert('AH84639149A 10')
         wl.insert('AL84639149A 10')
-        self.assertFalse(wl.bills['5'] or 
+        self.assertFalse(wl.bills['5'] or
                          wl.bills['20'] or wl.bills['50'])
         correct = ['AE84639149A', 'AH84639149A', 'AI84639149A', 'AL84639149A']
         self.assertEqual(correct, wl.bills['10'])
@@ -161,7 +161,9 @@ class TestFns(unittest.TestCase):
         self.assertEqual(correct, wl.check_bills('recovered_bills.txt'))
         sorted_dict = pickle.load(open('bill_file_77_sorted.pkl', 'rb'))
         self.assertNotEqual(sorted_dict, wl.bills)
+        print("....: ", wl.check_bills('recovered_bills.txt', True))
         self.assertEqual(correct, wl.check_bills('recovered_bills.txt', True))
+
         self.assertEqual(sorted_dict, wl.bills)
        
 if __name__ == "__main__":
