@@ -129,8 +129,8 @@ class Binary:
         total_self, total_other = 0, 0
         index = -1
         for i in range(0, 15):
-            amount_other = other.bit_array[index]*2**i
-            amount_self = self.bit_array[index]*2**i
+            amount_other = other.bit_array[index] * 2 ** i
+            amount_self = self.bit_array[index] * 2 ** i
             total_other += amount_other
             total_self += amount_self
             index -= 1
@@ -150,4 +150,4 @@ class Binary:
                 my_str += str(each)
             return Binary(my_str)
         else:
-            return (-self) + (-self) + (-self)
+            return -self
